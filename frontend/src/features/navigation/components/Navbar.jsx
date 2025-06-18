@@ -207,7 +207,7 @@ export const Navbar = () => {
           <div className={`flex items-center justify-center transition-all duration-300 ${searchExpanded ? 'transform -translate-x-10' : ''}`}>
             <Link to={loggedInUser?.isAdmin ? "/admin/dashboard" : "/"}>
               <h2 className="text-2xl font-bold text-black">
-                {loggedInUser?.isAdmin ? "Admin" : "PV Enterprices"}
+                {loggedInUser?.isAdmin ? "Admin" : "PV Enterprises"}
               </h2>
             </Link>
           </div>

@@ -97,7 +97,7 @@ export const Signup = () => {
       sx={{ overflowY: "hidden" }}
     >
       {!is900 && (
-        <Stack bgcolor={"black"} flex={1} justifyContent={"center"}>
+        <Stack bgcolor={"white"} flex={1} justifyContent={"center"}>
           <Lottie animationData={ecommerceOutlookAnimation} />
         </Stack>
       )}

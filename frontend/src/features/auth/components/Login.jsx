@@ -99,9 +99,10 @@ export const Login = () => {
       height={"100vh"}
       flexDirection={"row"}
       sx={{ overflowY: "hidden" }}
+      paddingY={4}
     >
       {!is900 && (
-        <Stack bgcolor={"black"} flex={1} justifyContent={"center"}>
+        <Stack bgcolor={"white"} flex={1} justifyContent={"center"} >
           <Lottie animationData={ecommerceOutlookAnimation} />
         </Stack>
       )}

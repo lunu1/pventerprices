@@ -118,7 +118,7 @@ export const Login = () => {
               sx={{ wordBreak: "break-word" }}
               fontWeight={600}
             >
-              Barosa
+              PV Enterprises
             </Typography>
             <Typography
               alignSelf={"flex-end"}

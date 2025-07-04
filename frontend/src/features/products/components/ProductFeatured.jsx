@@ -76,7 +76,7 @@ export const ProductFeatured = () => {
 
   return (
     <div className="py-10 mx-4">
-      <h1 className="text-center text-2xl mb-8 font-semibold">
+      <h1 className="text-center text-2xl mb-8 font-semibold text-red-600">
         FEATURED PRODUCTS
       </h1>
       {loading ? (

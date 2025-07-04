@@ -19,7 +19,7 @@ const NewArrivalCategory = () => {
 
   return (
     <div className="px-6 md:px-4">
-      <h1 className="text-3xl font-semibold text-center mb-10 w-full">Our Products</h1>
+      <h1 className="text-3xl font-semibold text-center mb-10 w-full text-red-600">Our Products</h1>
      <div className="grid gap-6"
      style={{
        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))"

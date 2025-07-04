@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { selectBrands, fetchAllBrandsAsync } from "../../brands/BrandSlice";
+
 import {
   clearSelectedProduct,
   fetchProductByIdAsync,
@@ -62,6 +64,9 @@ export const ProductUpdate = () => {
   const [newThumbnail, setNewThumbnail] = useState(null);
   const [newImages, setNewImages] = useState([]);
   const [removedImages, setRemovedImages] = useState([]);
+
+  const brands = useSelector(selectBrands) || [];
+
   
 
   useEffect(() => {
@@ -71,34 +76,37 @@ export const ProductUpdate = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (selectedProduct && categories.length > 0) {
-      // Find the actual category object
-      const categoryId = selectedProduct.category?._id || "";
-      const subcategoryId = selectedProduct.subcategory?._id || "";
+  dispatch(fetchAllBrandsAsync());
+}, [dispatch]);
 
-      // Set form values with complete product data
-      const formData = {
-        ...selectedProduct,
-        category: categoryId,
-        subcategory: subcategoryId,
-      };
+// const brandId = selectedProduct.brand?._id || "";
 
-      reset(formData);
+  useEffect(() => {
+  if (selectedProduct && categories.length > 0) {
+    const categoryId = selectedProduct.category?._id || "";
+    const subcategoryId = selectedProduct.subcategory?._id || "";
+    const brandId = selectedProduct?.brand?._id || "";
 
-      // Update state variables
-      setSelectedCategoryId(categoryId);
-      setCurrentThumbnail(selectedProduct.thumbnail || "");
-      setCurrentImages(selectedProduct.images || []);
+    const formData = {
+      ...selectedProduct,
+      category: categoryId,
+      subcategory: subcategoryId,
+      brand: brandId,
+    };
 
-      // Update subcategories based on selected category
-      if (categoryId) {
-        const category = categories.find((cat) => cat._id === categoryId);
-        if (category) {
-          setSubCategories(category.subCategory || []);
-        }
-      }
+    reset(formData);
+
+    setSelectedCategoryId(categoryId);
+    setCurrentThumbnail(selectedProduct.thumbnail || "");
+    setCurrentImages(selectedProduct.images || []);
+
+    const category = categories.find((cat) => cat._id === categoryId);
+    if (category) {
+      setSubCategories(category.subCategory || []);
     }
-  }, [selectedProduct, categories, reset]);
+  }
+}, [selectedProduct, categories, reset]);
+
 
   useEffect(() => {
     if (productUpdateStatus === "fullfilled") {
@@ -201,6 +209,7 @@ const handleProductUpdate = (data) => {
   formData.append("description", data.description);
   formData.append("price", data.price);
   formData.append("discountPercentage", data.discountPercentage);
+  formData.append("brand", data.brand);
 
   // Stock quantity
   Object.entries(data.stockQuantity || {}).forEach(([size, quantity]) => {
@@ -308,6 +317,30 @@ const handleProductUpdate = (data) => {
                 )}
               />
             </FormControl>
+
+<FormControl fullWidth>
+  <InputLabel id="brand-label">Brand</InputLabel>
+  <Controller
+    name="brand"
+    control={control}
+    defaultValue=""
+    render={({ field }) => (
+      <Select
+        labelId="brand-label"
+        {...field}
+        label="Brand"
+        error={!!errors.brand}
+      >
+        {brands.map((brand) => (
+          <MenuItem key={brand._id} value={brand._id}>
+            {brand.name}
+          </MenuItem>
+        ))}
+      </Select>
+    )}
+  />
+</FormControl>
+
           </Stack>
 
           <TextField

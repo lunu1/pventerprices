@@ -11,6 +11,7 @@ import NewArrivalCategory from "../features/products/components/NewArrivalCatego
 import { ProductBanner } from "../features/products/components/ProductBanner.jsx";
 import AboutPVAnterices from "./AboutPv.jsx";
 import BrandsSection from "../features/products/components/BrandSection.jsx";
+import HeroSlider from "./HeroSlider.jsx";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -28,8 +29,8 @@ export const HomePage = () => {
       <Navbar />
       <div className="pt-[65px]">
         {/* <HeroBanner /> */}
-        <ProductBanner/>
-        <div className="pt-[50px]">
+        <HeroSlider />
+        <div className="pt-[25px]">
           <NewArrivalCategory />
         </div>
 
@@ -38,11 +39,15 @@ export const HomePage = () => {
         </div>
 
         <div className="pt-[50px]">
+
+        <ProductBanner/>
+        </div>
+        <div className="pt-[50px]">
           <ProductFeatured />
         </div>
-        <div>
+        {/* <div>
           <BrandsSection/>
-        </div>
+        </div> */}
         {/* <ShopByCategory /> */}
         <Footer />
       </div>

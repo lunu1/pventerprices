@@ -47,6 +47,7 @@ import { SearchResultsPage } from "./pages/SearchResultsPage";
 import NewArrivalsLayout from "./features/products/pages/NewArrivalsLayout";
 import PaymentProcessing from "./features/checkout/components/PaymentProcessing";
 import AddCategory from "./features/admin/components/AddCategory";
+import BrandProducts from "./features/products/pages/BrandProducts";
 
 function App() {
   const isAuthChecked = useSelector(selectIsAuthChecked);
@@ -71,6 +72,8 @@ function App() {
         <Route path="/categories/:categoryTitle" element={<CategroryLayout />}>
           <Route path=":subcategoryTitle" element={<SubcategoryLayout />} />
         </Route>
+        <Route path="/brands/:brandName" element={<BrandProducts />} />
+
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/new-arrivals/:categoryTitle" element={<NewArrivalsLayout />} />
 

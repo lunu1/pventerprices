@@ -23,6 +23,7 @@ export const ProductCard = ({
   price,
   thumbnail,
   description,
+  brand,
   stockQuantity,
   handleAddRemoveFromWishlist,
   isWishlistCard,
@@ -108,6 +109,11 @@ export const ProductCard = ({
       >
         {description}
       </Typography>
+
+      {/* Brand */}
+   <Typography variant="body2" color="text.secondary">
+  Brand: {typeof brand === 'object' ? brand?.name : brand}
+</Typography>
 
       {/* Price + CTA */}
       <Stack direction="row" justifyContent="space-between" alignItems="center">

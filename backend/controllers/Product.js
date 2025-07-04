@@ -91,40 +91,48 @@ exports.create = async (req, res) => {
       category,
       subCategory,
       stockQuantity,
+      brand,
     } = req.body;
 
-
+    // ✅ Validate required fields
     if (
       !title ||
       !description ||
       !price ||
       !category ||
       !subCategory ||
-      !stockQuantity
+      !stockQuantity ||
+      !brand
     ) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    // ✅ Number validations
     if (isNaN(price) || isNaN(discountPercentage)) {
       return res
         .status(400)
-        .json({ message: "Price and discountPercentage must be numbers" });
+        .json({ message: "Price and discount must be numbers" });
     }
 
-
-    // Validate subcategory
+    // ✅ Subcategory should belong to category
     const validSubCategory = await SubCategory.findOne({
       _id: subCategory,
       category,
     });
 
     if (!validSubCategory) {
-      return res
-        .status(400)
-        .json({ message: "SubCategory does not belong to the given category" });
+      return res.status(400).json({
+        message: "SubCategory does not belong to the selected category",
+      });
     }
 
-    // Files from Multer
+    // ✅ Brand must exist
+    const brandExists = await mongoose.model("Brand").findById(brand);
+    if (!brandExists) {
+      return res.status(400).json({ message: "Invalid brand ID" });
+    }
+
+    // ✅ Images from multer
     const thumbnailFile = req.files["thumbnail"]?.[0];
     const imageFiles = req.files["images"] || [];
 
@@ -138,6 +146,7 @@ exports.create = async (req, res) => {
       discountPercentage: parseFloat(discountPercentage),
       category,
       subcategory: subCategory,
+      brand, // ✅ Save the brand
       stockQuantity: parseInt(stockQuantity),
       thumbnail,
       images,
@@ -148,9 +157,12 @@ exports.create = async (req, res) => {
     res.status(201).json(newProduct);
   } catch (error) {
     console.error("Error creating product:", error);
-    res.status(500).json({ message: "Error adding product, please try again later" });
+    res
+      .status(500)
+      .json({ message: "Error adding product, please try again later" });
   }
 };
+
 
 
 exports.getAll = async (req, res) => {
@@ -221,7 +233,10 @@ exports.getAll = async (req, res) => {
 // };
 
 const totalDocs = await Product.countDocuments(filter);
-    const query = Product.find(filter).sort(sort);
+ const query = Product.find(filter)
+  .sort(sort)
+  .populate("brand", "name image"); // Only select `name` and `image` fields from Brand
+
 
     if (limit) {
   query.skip(skip).limit(limit);
@@ -272,33 +287,41 @@ exports.updateById = async (req, res) => {
   try {
     const { id } = req.params;
     const existingProduct = await Product.findById(id);
-    
+
     if (!existingProduct) {
       return res.status(404).json({ message: "Product not found" });
     }
 
     const updatedFields = { ...req.body };
 
-    // Handle thumbnail
+    // ✅ Validate brand if provided
+    if (updatedFields.brand) {
+      const brandExists = await mongoose.model("Brand").findById(updatedFields.brand);
+      if (!brandExists) {
+        return res.status(400).json({ message: "Invalid brand ID" });
+      }
+    }
+
+    // ✅ Handle thumbnail
     if (req.files["thumbnail"]?.[0]) {
       updatedFields.thumbnail = req.files["thumbnail"][0].path;
     }
 
-    // Handle images - start with existing images
+    // ✅ Handle images - preserve existing ones
     let finalImages = [...existingProduct.images];
 
-    // Remove images marked for deletion
+    // ✅ Remove deleted images
     if (req.body.removedImages) {
-      const removedUrls = Array.isArray(req.body.removedImages) 
-        ? req.body.removedImages 
+      const removedUrls = Array.isArray(req.body.removedImages)
+        ? req.body.removedImages
         : [req.body.removedImages];
-      finalImages = finalImages.filter(img => !removedUrls.includes(img));
+      finalImages = finalImages.filter((img) => !removedUrls.includes(img));
     }
 
-    // Add new images (only if they don't already exist)
+    // ✅ Add new images
     if (req.files["images"]) {
-      const newImageUrls = req.files["images"].map(file => file.path);
-      newImageUrls.forEach(url => {
+      const newImageUrls = req.files["images"].map((file) => file.path);
+      newImageUrls.forEach((url) => {
         if (!finalImages.includes(url)) {
           finalImages.push(url);
         }
@@ -307,16 +330,18 @@ exports.updateById = async (req, res) => {
 
     updatedFields.images = finalImages;
 
+    // ✅ Update the product
     const updated = await Product.findByIdAndUpdate(id, updatedFields, {
       new: true,
     });
 
     res.status(200).json(updated);
   } catch (error) {
-    console.error(error);
+    console.error("Error updating product:", error);
     res.status(500).json({ message: "Error updating product" });
   }
 };
+
 
 
 // exports.updateById = async (req, res) => {

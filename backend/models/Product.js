@@ -30,6 +30,11 @@ const productSchema = new Schema(
       ref: "subcategory",
       required: true,
     },
+    brand: {
+      type: Schema.Types.ObjectId,
+      ref: "Brand",
+      required: true,
+    },
     stockQuantity: {
       type: Number,
       required: true,

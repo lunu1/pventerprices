@@ -15,7 +15,7 @@ export const store=configureStore({
         AuthSlice,
         ProductSlice,
         UserSlice,
-        BrandSlice,
+        brandSlice: BrandSlice,
         categories: categoriesReducer,
         CartSlice,
         AddressSlice,

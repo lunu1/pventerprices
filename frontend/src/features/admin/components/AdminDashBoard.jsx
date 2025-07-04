@@ -405,7 +405,7 @@ const cancelDelete = () => {
             title={product.title}
             thumbnail={product.thumbnail}
             price={product.price}
-            // brand={product.brand}
+            brand={product.brand}
             stockQuantity={product.stockQuantity}
             isAdminCard={true}
           />

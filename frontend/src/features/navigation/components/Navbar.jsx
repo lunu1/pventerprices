@@ -7,6 +7,7 @@ import { selectCartItems } from "../../cart/CartSlice";
 import { selectWishlistItems } from "../../wishlist/WishlistSlice";
 import { axiosi } from "../../../config/axios";
 import { SearchBar } from "../../search/SearchBar";
+import { fetchAllBrandsAsync, selectBrands } from "../../brands/BrandSlice";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,9 +20,14 @@ export const Navbar = () => {
   const wishlistItems = useSelector(selectWishlistItems);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const brands = useSelector(selectBrands);
 
   const cartItemsCount = cartItems?.length || 0;
   const wishlistItemsCount = wishlistItems?.length || 0;
+
+  useEffect(() => {
+  dispatch(fetchAllBrandsAsync());
+}, [dispatch]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -36,9 +42,13 @@ export const Navbar = () => {
   }, []);
 
   const handleOutsideClick = useCallback((e) => {
-    if (!e.target.closest(".dropdown-container") && !e.target.closest(".search-container")) {
+    if (
+      !e.target.closest(".dropdown-container") &&
+      !e.target.closest(".search-container")
+    ) {
       setShopDropdown(false);
       setProfileDropdown(false);
+      setOpenDropdown(false);
       // Don't close search on outside click, let the SearchBar component handle focus
     }
   }, []);
@@ -90,6 +100,8 @@ export const Navbar = () => {
     );
   };
 
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   return (
     <div className="fixed top-0 w-full h-16 bg-white text-black shadow-md z-50">
       <div className="container mx-auto px-4 md:px-8 h-full relative">
@@ -98,65 +110,122 @@ export const Navbar = () => {
           {/* Left Column - Desktop Links */}
           <div className="flex items-center">
             {!loggedInUser?.isAdmin && (
-              <div className="hidden md:flex gap-8 items-center">
-                <div className="relative dropdown-container">
-                  <button
-                    className="flex items-center text-sm font-medium hover:text-gray-600"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShopDropdown(!shopDropdown);
-                    }}
+              <div className="hidden md:flex gap-8 items-center uppercase">
+                {/* ───────── categories with their own dropdowns ───────── */}
+                {categories.map((category) => (
+                  <div
+                    key={category._id}
+                    className="relative dropdown-container"
                   >
-                    SHOP
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`w-4 h-4 ml-1 transform transition-transform duration-200 ${
-                        shopDropdown ? "rotate-180" : "rotate-0"
-                      }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                    <button
+                      className="flex items-center text-sm font-medium hover:text-gray-600 uppercase"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOpenDropdown(
+                          openDropdown === category._id ? null : category._id
+                        );
+                      }}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  {shopDropdown && (
-                    <div className="fixed left-0 right-0 mx-auto bg-white shadow-lg z-10 container mt-4 flex flex-wrap justify-between py-8 px-8 overflow-y-auto max-h-[80vh]">
-                      {categories.map((category) => (
-                        <div
-                          key={category._id}
-                          className="w-1/4 flex flex-col items-start"
-                        >
-                          <h1 className="font-semibold text-lg text-black mb-2">
-                            {category.name}
-                          </h1>
-                          <ul className="text-sm text-gray-700 cursor-pointer">
-                            {category.subCategory.map((sub) => (
-                              <li
-                                key={sub._id}
-                                className="hover:text-black mb-1"
-                                onClick={() => {
-                                  navigate(
-                                    `/categories/${category.name}/${sub.name}`
-                                  );
-                                  setShopDropdown(false);
-                                }}
-                              >
-                                {sub.name}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                      {category.name}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`w-4 h-4 ml-1 transform transition-transform duration-200 ${
+                          openDropdown === category._id
+                            ? "rotate-180"
+                            : "rotate-0"
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
 
+                    {openDropdown === category._id && (
+                      <div
+                        className="absolute left-0 top-full mt-4 w-48 bg-white shadow-lg z-10
+                       py-4 px-4 overflow-y-auto max-h-72"
+                      >
+                        <ul className="text-sm text-gray-700 cursor-pointer">
+                          {category.subCategory.map((sub) => (
+                            <li
+                              key={sub._id}
+                              className="hover:text-black mb-1"
+                              onClick={() => {
+                                navigate(
+                                  `/categories/${category.name}/${sub.name}`
+                                );
+                                setOpenDropdown(null);
+                              }}
+                            >
+                              {sub.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+
+                  
+                ))}
+
+
+                {/* ───────── brands dropdown ───────── */}
+<div className="relative dropdown-container">
+  <button
+    className="flex items-center text-sm font-medium hover:text-gray-600 uppercase"
+    onClick={(e) => {
+      e.stopPropagation();
+      setOpenDropdown(openDropdown === "brands" ? null : "brands");
+    }}
+  >
+    Brands
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`w-4 h-4 ml-1 transform transition-transform duration-200 ${
+        openDropdown === "brands" ? "rotate-180" : "rotate-0"
+      }`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  {openDropdown === "brands" && (
+    <div className="absolute left-0 top-full mt-4 w-48 bg-white shadow-lg z-10 py-4 px-4 overflow-y-auto max-h-72">
+      <ul className="text-sm text-gray-700 cursor-pointer">
+        {brands.map((brand) => (
+          <li
+            key={brand._id}
+            className="hover:text-black mb-1"
+            onClick={() => {
+              navigate(`/brands/${brand.name}`);
+              setOpenDropdown(null);
+            }}
+          >
+            {brand.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>
+
+
+                {/* ───────── static links ───────── */}
                 <Link
                   to="/about-us"
                   className="text-sm font-medium hover:text-gray-600"
@@ -169,12 +238,10 @@ export const Navbar = () => {
                 >
                   CONTACT
                 </Link>
-                <Link to="/" className="text-sm font-medium hover:text-gray-600">
-                  MORE
-                </Link>
+              
               </div>
             )}
-            
+
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
@@ -202,46 +269,75 @@ export const Navbar = () => {
               </button>
             </div>
           </div>
-          
+
           {/* Center Column - Logo */}
-          <div className={`flex items-center justify-center transition-all duration-300 ${searchExpanded ? 'transform -translate-x-10' : ''}`}>
+          <div
+            className={`flex items-center justify-center transition-all duration-300 ${
+              searchExpanded ? "transform -translate-x-10" : ""
+            }`}
+          >
             <Link to={loggedInUser?.isAdmin ? "/admin/dashboard" : "/"}>
-              <h2 className="text-2xl font-bold text-black">
-                {loggedInUser?.isAdmin ? "Admin" : "PV Enterprises"}
-              </h2>
+              {loggedInUser?.isAdmin ? (
+                <h2 className="text-2xl font-bold text-black">Admin</h2>
+              ) : (
+                <img src="logo.png" alt="logo" className="h-14 w-auto" />
+              )}
             </Link>
           </div>
-          
+
           {/* Right Column - Search and User Icons */}
           <div className="flex items-center justify-end gap-4 sm:gap-6">
             {/* Expandable Search Bar */}
             <div className="relative search-container hidden sm:block">
               {searchExpanded ? (
-                <div className={`absolute right-0 w-64 md:w-80 transition-all duration-300 z-10 -top-5`}>
-                   
-
+                <div
+                  className={`absolute right-0 w-64 md:w-80 transition-all duration-300 z-10 -top-5`}
+                >
                   <SearchBar className="w-full" />
-                  
-                  <button 
-                    type="button" 
+
+                  <button
+                    type="button"
                     className="absolute right-12 top-1/4 mx-5 text-gray-500"
-                    onClick={() => { setSearchExpanded(false);
-                      
-                     navigate('/admin/dashboard') 
+                    onClick={() => {
+                      setSearchExpanded(false);
+
+                      navigate("/admin/dashboard");
                     }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
               ) : (
-                <button 
+                <button
                   onClick={() => setSearchExpanded(true)}
                   className="p-2 hover:bg-gray-100 rounded-full"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
                   </svg>
                 </button>
               )}
@@ -282,18 +378,19 @@ export const Navbar = () => {
                 <Profile
                   onClick={() => navigate("/login")}
                   className="w-5 h-5 cursor-pointer hover:text-gray-600"
-                />{loggedInUser && (
-                  
-               <>
-                <Love
-                  onClick={() => navigate("/login")}
-                  className="w-6 h-6 cursor-pointer hover:text-gray-600"
                 />
-                <Cart
-                  onClick={() => navigate("/login")}
-                  className="w-6 h-6 cursor-pointer hover:text-gray-600"
-                /> 
-                </>)}
+                {loggedInUser && (
+                  <>
+                    <Love
+                      onClick={() => navigate("/login")}
+                      className="w-6 h-6 cursor-pointer hover:text-gray-600"
+                    />
+                    <Cart
+                      onClick={() => navigate("/login")}
+                      className="w-6 h-6 cursor-pointer hover:text-gray-600"
+                    />
+                  </>
+                )}
               </>
             )}
           </div>
@@ -305,12 +402,9 @@ export const Navbar = () => {
             <div className="py-4 px-6">
               {/* Search Bar in Mobile Menu */}
               <div className="mb-4">
-               
-                  
                 <SearchBar className="w-full" />
-              
               </div>
-            
+
               {loggedInUser && (
                 <h1 className="font-semibold">Hey {loggedInUser.name}</h1>
               )}
@@ -322,86 +416,124 @@ export const Navbar = () => {
                 Home
               </Link>
 
-              {!loggedInUser?.isAdmin && (
-                <>
-                  <div
-                    className="font-semibold cursor-pointer mt-4 flex justify-between items-center"
-                    onClick={() => toggleCategory("shop")}
+             {/* CATEGORY SECTION */}
+{!loggedInUser?.isAdmin && (
+  <>
+    {/* <div
+      className="font-semibold cursor-pointer mt-4 flex justify-between items-center"
+      onClick={() => toggleCategory("category")}
+    >
+      <span>Category</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={`w-4 h-4 transform transition-transform duration-200 ${
+          expandedCategory === "category" ? "rotate-180" : "rotate-0"
+        }`}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </div>
+
+    {expandedCategory === "category" && ( */}
+      <div className="mt-4">
+        {categories.map((category) => (
+          <div key={category._id} className="mb-3">
+            <div
+              className="mb-2 cursor-pointer font-semibold flex justify-between items-center"
+              onClick={() => toggleSubCategory(category.name)}
+            >
+              <span>{category.name}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`w-4 h-4 transform transition-transform duration-200 ${
+                  expandedSubCategory === category.name ? "rotate-180" : "rotate-0"
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+
+            {expandedSubCategory === category.name && (
+              <ul className="ml-4 text-sm space-y-2">
+                {category.subCategory.map((sub) => (
+                  <li
+                    key={sub._id}
+                    className="hover:text-black"
+                    onClick={() => {
+                      navigate(`/categories/${category.name}/${sub.name}`);
+                      setMobileMenuOpen(false);
+                    }}
                   >
-                    <span>Shop</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`w-4 h-4 transform transition-transform duration-200 ${
-                        expandedCategory === "shop"
-                          ? "rotate-180"
-                          : "rotate-0"
-                      }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
+                    {sub.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    {/* )} */}
 
-                  {expandedCategory === "shop" && (
-                    <div className="ml-4 mt-2">
-                      {categories.map((category) => (
-                        <div key={category._id} className="mb-3">
-                          <div
-                            className="mb-2 cursor-pointer font-semibold flex justify-between items-center"
-                            onClick={() => toggleSubCategory(category.name)}
-                          >
-                            <span>{category.name}</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className={`w-4 h-4 transform transition-transform duration-200 ${
-                                expandedSubCategory === category.name
-                                  ? "rotate-180"
-                                  : "rotate-0"
-                              }`}
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 9l-7 7-7-7"
-                              />
-                            </svg>
-                          </div>
+    {/* BRAND SECTION */}
+<div
+  className="font-semibold cursor-pointer mt-4 flex justify-between items-center"
+  onClick={() => toggleCategory("brand")}
+>
+  <span>Brands</span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={`w-4 h-4 transform transition-transform duration-200 ${
+      expandedCategory === "brand" ? "rotate-180" : "rotate-0"
+    }`}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M19 9l-7 7-7-7"
+    />
+  </svg>
+</div>
 
-                          {expandedSubCategory === category.name && (
-                            <ul className="ml-4 text-sm space-y-2">
-                              {category.subCategory.map((sub) => (
-                                <li
-                                  key={sub._id}
-                                  className="hover:text-black"
-                                  onClick={() => {
-                                    navigate(
-                                      `/categories/${category.name}/${sub.name}`
-                                    );
-                                    setMobileMenuOpen(false);
-                                  }}
-                                >
-                                  {sub.name}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </>
-              )}
+{expandedCategory === "brand" && (
+  <ul className="ml-4 mt-2 text-sm space-y-2">
+    {brands.map((brand) => (
+      <li
+        key={brand._id}
+        className="hover:text-black"
+        onClick={() => {
+          navigate(`/brands/${brand.name}`);
+          setMobileMenuOpen(false);
+        }}
+      >
+        {brand.name}
+      </li>
+    ))}
+  </ul>
+)}
+
+  </>
+)}
+
 
               <Link
                 to="/about-us"
@@ -442,7 +574,7 @@ export const Navbar = () => {
                         className="block py-2"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Add Category
+                        Add Category / Add Brand
                       </Link>
                       <Link
                         to="/admin/orders"
@@ -451,7 +583,6 @@ export const Navbar = () => {
                       >
                         Manage Orders
                       </Link>
-                      
                     </>
                   ) : (
                     <>
@@ -533,12 +664,12 @@ const ProfileIcon = ({
               to="/admin/add-category"
               className="block px-4 py-2 text-sm hover:bg-gray-100 whitespace-nowrap"
             >
-            Add Category
+              Add Category / Add Brand
             </Link>
             <Link
               to="/admin/add-product"
               className="block px-4 py-2 text-sm hover:bg-gray-100 whitespace-nowrap"
-              >
+            >
               Add Products
             </Link>
             <Link

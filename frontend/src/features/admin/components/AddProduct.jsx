@@ -22,6 +22,12 @@ import { useForm } from "react-hook-form";
 import { selectCategories } from "../../categories/CategoriesSlice";
 import { toast } from "react-toastify";
 
+import {
+  fetchAllBrandsAsync,
+  selectBrands,
+} from "../../brands/BrandSlice";
+
+
 export const AddProduct = () => {
   const {
     register,
@@ -47,6 +53,8 @@ export const AddProduct = () => {
   //lunu
   const [thumbnail, setThumbnail] = useState(null);
   const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
+
+  
 
   const isLoading = productAddStatus === "pending";
 
@@ -132,6 +140,7 @@ export const AddProduct = () => {
     formData.append("category", data.category);
     formData.append("subCategory", data.subCategory);
     formData.append("stockQuantity", data.stockQuantity);
+    formData.append("brand", data.brand);
 
     // Append thumbnail
     if (thumbnail) {
@@ -145,6 +154,14 @@ export const AddProduct = () => {
 
     dispatch(addProductAsync(formData));
   };
+
+const brands = useSelector(selectBrands);
+useEffect(() => {
+  dispatch(fetchAllBrandsAsync());
+}, [dispatch]);
+
+const [selectedBrand, setSelectedBrand] = useState("");
+
 
   return (
     <Stack p={2} justifyContent="center" alignItems="center">
@@ -200,6 +217,22 @@ export const AddProduct = () => {
               ))}
             </Select>
           </FormControl>
+          <FormControl fullWidth>
+  <InputLabel>Brand</InputLabel>
+  <Select
+    {...register("brand", { required: "Brand is required" })}
+    label="Brand"
+    defaultValue=""
+    error={!!errors.brand}
+  >
+    {brands.map((brand) => (
+      <MenuItem key={brand._id} value={brand._id}>
+        {brand.name}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
+
         </Stack>
 
         {/* Description */}

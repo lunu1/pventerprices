@@ -108,7 +108,23 @@ export const Navbar = () => {
         {/* Three-column layout */}
         <div className="grid grid-cols-3 h-full">
           {/* Left Column - Desktop Links */}
-          <div className="flex items-center">
+       
+          <div
+            className={`flex items-center justify-center transition-all duration-300 ${
+              searchExpanded ? "transform -translate-x-10" : ""
+            }`}
+          >
+            <Link to={loggedInUser?.isAdmin ? "/admin/dashboard" : "/"}>
+              {loggedInUser?.isAdmin ? (
+                <h2 className="text-2xl font-bold text-black">Admin</h2>
+              ) : (
+                <img src="logo.png" alt="logo" className="h-14 w-auto" />
+              )}
+            </Link>
+          </div>
+
+          {/* Center Column - Logo */}
+   <div className="flex items-center">
             {!loggedInUser?.isAdmin && (
               <div className="hidden md:flex gap-8 items-center uppercase">
                 {/* ───────── categories with their own dropdowns ───────── */}
@@ -269,22 +285,6 @@ export const Navbar = () => {
               </button>
             </div>
           </div>
-
-          {/* Center Column - Logo */}
-          <div
-            className={`flex items-center justify-center transition-all duration-300 ${
-              searchExpanded ? "transform -translate-x-10" : ""
-            }`}
-          >
-            <Link to={loggedInUser?.isAdmin ? "/admin/dashboard" : "/"}>
-              {loggedInUser?.isAdmin ? (
-                <h2 className="text-2xl font-bold text-black">Admin</h2>
-              ) : (
-                <img src="logo.png" alt="logo" className="h-14 w-auto" />
-              )}
-            </Link>
-          </div>
-
           {/* Right Column - Search and User Icons */}
           <div className="flex items-center justify-end gap-4 sm:gap-6">
             {/* Expandable Search Bar */}

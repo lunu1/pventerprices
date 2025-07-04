@@ -132,7 +132,7 @@ const AboutPVAnterices = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="bg-red-600 text-white p-8 mb-12"
+          className="bg-red-600 text-white p-8 mb-12 rounded-2xl"
         >
           <h3 className="text-2xl font-bold text-center mb-6">
             Why Choose Us?

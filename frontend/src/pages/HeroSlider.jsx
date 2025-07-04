@@ -8,13 +8,13 @@ import 'swiper/css/navigation';
 const slides = [
   {
     id: 1,
-    image: 'hero1.jpg',
+    image: 'hero2.jpg',
     title: 'Luxury Redefined',
     subtitle: 'Experience premium comfort and elegance',
   },
   {
     id: 2,
-    image: 'hero2.jpg',
+    image: 'hero1.jpg',
     title: 'Drive Your Dream',
     subtitle: 'High-end performance cars for unforgettable moments',
   },

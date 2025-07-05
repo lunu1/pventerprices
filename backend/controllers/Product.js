@@ -2,6 +2,7 @@ const { Schema, default: mongoose } = require("mongoose");
 const Product = require("../models/Product");
 const Category = require("../models/Category");
 const SubCategory = require("../models/SubCategory");
+const Brand = require("../models/Brand");
 
 // exports.create = async (req, res) => {
 //   const {
@@ -160,6 +161,37 @@ exports.create = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error adding product, please try again later" });
+  }
+};
+
+exports.getByBrandName = async (req, res) => {
+  try {
+    const { brandName } = req.params;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 12;
+    const skip = (page - 1) * limit;
+
+    const brand = await Brand.findOne({ name: brandName });
+    if (!brand) {
+      return res.status(404).json({ message: "Brand not found" });
+    }
+
+    const filter = { brand: brand._id };
+
+    const totalDocs = await Product.countDocuments(filter);
+    const products = await Product.find(filter)
+      .populate("brand", "name image")
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      products,
+      totalPages: Math.ceil(totalDocs / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    console.error("Error fetching brand products:", error);
+    res.status(500).json({ message: "Error fetching brand products" });
   }
 };
 

@@ -10,8 +10,9 @@ router
     { name: "thumbnail", maxCount: 1 },
     { name: "images", maxCount: 4 },
   ]), productController.create)
-  .get("/", productController.getAll)
 
+  .get("/", productController.getAll)
+  .get("/brand/:brandName", productController.getByBrandName)
 
   .get("/featured", productController.getFeaturedProducts)
   .patch("/featured/:id", productController.featuredProduct)

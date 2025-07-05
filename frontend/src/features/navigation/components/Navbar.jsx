@@ -109,19 +109,54 @@ export const Navbar = () => {
         <div className="grid grid-cols-3 h-full">
           {/* Left Column - Desktop Links */}
        
-          <div
-            className={`flex items-center justify-center transition-all duration-300 ${
-              searchExpanded ? "transform -translate-x-10" : ""
-            }`}
-          >
-            <Link to={loggedInUser?.isAdmin ? "/admin/dashboard" : "/"}>
-              {loggedInUser?.isAdmin ? (
-                <h2 className="text-2xl font-bold text-black">Admin</h2>
-              ) : (
-                <img src="logo.png" alt="logo" className="h-14 w-auto" />
-              )}
-            </Link>
-          </div>
+       <div
+  className={`flex items-center justify-between md:justify-center transition-all duration-300 ${
+    searchExpanded ? "transform -translate-x-10" : ""
+  }`}
+>
+  {/* Hamburger first on mobile */}
+  <div className="md:hidden order-1">
+    <button
+      className="p-2"
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-6 h-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d={
+            mobileMenuOpen
+              ? "M6 18L18 6M6 6l12 12"
+              : "M4 6h16M4 12h16m-7 6h7"
+          }
+        />
+      </svg>
+    </button>
+  </div>
+
+  {/* Logo second on mobile */}
+<div className="flex-1 flex justify-center order-2">
+  <Link
+    to={loggedInUser?.isAdmin ? "/admin/dashboard" : "/"}
+    className="inline-block"
+  >
+    {loggedInUser?.isAdmin ? (
+      <h2 className="text-2xl font-bold text-black">Admin</h2>
+    ) : (
+      <img src="/logo.png" alt="logo" className="h-14 w-auto max-w-[200px]" />
+    )}
+  </Link>
+</div>
+
+</div>
+
 
           {/* Center Column - Logo */}
    <div className="flex items-center">
@@ -259,7 +294,7 @@ export const Navbar = () => {
             )}
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            {/* <div className="md:hidden">
               <button
                 className="p-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -283,7 +318,7 @@ export const Navbar = () => {
                   />
                 </svg>
               </button>
-            </div>
+            </div> */}
           </div>
           {/* Right Column - Search and User Icons */}
           <div className="flex items-center justify-end gap-4 sm:gap-6">

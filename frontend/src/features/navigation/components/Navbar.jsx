@@ -117,7 +117,7 @@ export const Navbar = () => {
   {/* Hamburger first on mobile */}
   <div className="md:hidden order-1">
     <button
-      className="p-2"
+      className=""
       onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
     >
       <svg
@@ -150,7 +150,12 @@ export const Navbar = () => {
     {loggedInUser?.isAdmin ? (
       <h2 className="text-2xl font-bold text-black">Admin</h2>
     ) : (
-      <img src="/logo.png" alt="logo" className="h-14 w-auto max-w-[200px]" />
+      <img
+  src="/logo.png"
+  alt="logo"
+  className="h-10 w-auto max-w-[200px] md:h-12 md:max-w-full"
+/>
+
     )}
   </Link>
 </div>

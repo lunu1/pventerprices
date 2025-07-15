@@ -167,6 +167,18 @@ export const Navbar = () => {
    <div className="flex items-center">
             {!loggedInUser?.isAdmin && (
               <div className="hidden md:flex gap-8 items-center uppercase">
+                 <Link
+                  to="/"
+                  className="text-sm font-medium hover:text-gray-600"
+                >
+                  Home
+                </Link>
+                 <Link
+                  to="/about-us"
+                  className="text-sm font-medium hover:text-gray-600"
+                >
+                  ABOUT
+                </Link>
                 {/* ───────── categories with their own dropdowns ───────── */}
                 {categories.map((category) => (
                   <div
@@ -230,6 +242,7 @@ export const Navbar = () => {
 
                   
                 ))}
+                
 
 
                 {/* ───────── brands dropdown ───────── */}
@@ -259,6 +272,7 @@ export const Navbar = () => {
       />
     </svg>
   </button>
+  
 
   {openDropdown === "brands" && (
     <div className="absolute left-0 top-full mt-4 w-48 bg-white shadow-lg z-10 py-4 px-4 overflow-y-auto max-h-72">
@@ -282,12 +296,7 @@ export const Navbar = () => {
 
 
                 {/* ───────── static links ───────── */}
-                <Link
-                  to="/about-us"
-                  className="text-sm font-medium hover:text-gray-600"
-                >
-                  ABOUT
-                </Link>
+               
                 <Link
                   to="/contact-us"
                   className="text-sm font-medium hover:text-gray-600"

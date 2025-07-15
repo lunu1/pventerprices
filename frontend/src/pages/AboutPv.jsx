@@ -1,37 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Wrench, 
+  Package, 
   Droplet, 
   Zap, 
-  Shield, 
+  ShoppingCart, 
   Award, 
   CheckCircle
 } from 'lucide-react';
 
-const AboutPVAnterices = () => {
-  const services = [
+const AboutPVEnterprises = () => {
+  const categories = [
     {
       icon: <Droplet className="w-5 h-5" />,
-      title: "Sanitary Store",
-      description: "Premium bathroom fixtures & accessories"
+      title: "Sanitary Products",
+      description: "Premium bathroom fittings, pipes & accessories"
     },
     {
       icon: <Zap className="w-5 h-5" />,
-      title: "Electrical Solutions",
-      description: "Complete electrical installations & repairs"
+      title: "Electrical Products",
+      description: "Wiring, lighting solutions & branded electricals"
     },
     {
-      icon: <Wrench className="w-5 h-5" />,
-      title: "Plumbing Services",
-      description: "Expert plumbing for homes & businesses"
+      icon: <Package className="w-5 h-5" />,
+      title: "Plumbing Essentials",
+      description: "Pipes, valves & plumbing hardware for all needs"
     }
   ];
 
   const features = [
-    "25+ Years Experience",
-    "Licensed Professionals",
-    "24/7 Emergency Service",
+    "25+ Years in Trading",
+    "Top Branded Products",
+    "Wide Range of Stock",
     "Quality Guaranteed"
   ];
 
@@ -46,10 +46,10 @@ const AboutPVAnterices = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold text-red-600 mb-4">
-            About <span className="border-b-4 border-red-600">PV Anterices</span>
+            About <span className="border-b-4 border-red-600">PV Enterprises</span>
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Your trusted partner for sanitary, electrical, and plumbing solutions
+            Your trusted trading partner for sanitary, electrical, and plumbing products
           </p>
         </motion.div>
 
@@ -65,16 +65,16 @@ const AboutPVAnterices = () => {
             <div className="relative overflow-hidden border-4 border-red-600">
               <img
                 src="https://www.capitaltrading.co/wp-content/uploads/2022/07/ZZH_T23447A01_000_01-1024x768.jpg"
-                alt="PV Anterices Store"
-                className="w-full h-96 object-cover filter  hover:grayscale transition-all duration-500"
+                alt="PV Enterprises Trading Store"
+                className="w-full h-96 object-cover filter hover:grayscale transition-all duration-500"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-red-600 bg-opacity-80 text-white p-4">
-                <h3 className="text-xl font-bold">Modern Facilities</h3>
-                <p className="text-sm">Professional showroom & service center</p>
+                <h3 className="text-xl font-bold">Extensive Showroom</h3>
+                <p className="text-sm">Wide range of premium products in stock</p>
               </div>
             </div>
             
-            {/* Stats Badge */}
+            {/* Badge */}
             <div className="absolute -top-4 -right-4 bg-red-600 text-white p-4 border-4 border-white shadow-lg">
               <div className="text-center">
                 <div className="text-2xl font-bold">ISO</div>
@@ -92,21 +92,21 @@ const AboutPVAnterices = () => {
           >
             <div>
               <h2 className="text-3xl font-bold text-red-600 mb-4">
-                Excellence Since 1998
+                Excellence Since 2003
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                PV Anterices has been Kerala's leading provider of comprehensive 
-                sanitary, electrical, and plumbing solutions for over 25 years.
+                PV Enterprises has been Kerala's leading supplier of sanitary, electrical, 
+                and plumbing products for over 22 years.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                We combine decades of experience with modern technology to deliver 
-                unmatched quality and reliability in every project.
+                We partner with top brands to provide premium quality products that meet 
+                the needs of homes, businesses, and large-scale projects.
               </p>
             </div>
 
-            {/* Services */}
+            {/* Product Categories */}
             <div className="space-y-3">
-              {services.map((service, index) => (
+              {categories.map((category, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
@@ -115,11 +115,11 @@ const AboutPVAnterices = () => {
                   className="flex items-center space-x-3 p-3 border-2 border-gray-200 hover:border-red-600 transition-colors duration-300"
                 >
                   <div className="bg-red-600 text-white p-2">
-                    {service.icon}
+                    {category.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-red-600">{service.title}</h3>
-                    <p className="text-sm text-gray-600">{service.description}</p>
+                    <h3 className="font-semibold text-red-600">{category.title}</h3>
+                    <p className="text-sm text-gray-600">{category.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -161,20 +161,20 @@ const AboutPVAnterices = () => {
           className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center"
         >
           <div className="border-4 border-red-600 p-6">
-            <div className="text-3xl font-bold text-red-600">5000+</div>
-            <div className="text-sm text-gray-600">Happy Customers</div>
+            <div className="text-3xl font-bold text-red-600">100+</div>
+            <div className="text-sm text-gray-600">Trusted Clients</div>
           </div>
           <div className="border-4 border-red-600 p-6">
-            <div className="text-3xl font-bold text-red-600">25+</div>
+            <div className="text-3xl font-bold text-red-600">23+</div>
             <div className="text-sm text-gray-600">Years Experience</div>
           </div>
           <div className="border-4 border-red-600 p-6">
-            <div className="text-3xl font-bold text-red-600">50+</div>
-            <div className="text-sm text-gray-600">Expert Technicians</div>
+            <div className="text-3xl font-bold text-red-600">500+</div>
+            <div className="text-sm text-gray-600">Product Range</div>
           </div>
           <div className="border-4 border-red-600 p-6">
-            <div className="text-3xl font-bold text-red-600">24/7</div>
-            <div className="text-sm text-gray-600">Support Available</div>
+            <div className="text-3xl font-bold text-red-600">Top Brands</div>
+            <div className="text-sm text-gray-600">Guaranteed Quality</div>
           </div>
         </motion.div>
       </div>
@@ -182,4 +182,4 @@ const AboutPVAnterices = () => {
   );
 };
 
-export default AboutPVAnterices;
+export default AboutPVEnterprises;

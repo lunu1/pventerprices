@@ -19,7 +19,7 @@ const AboutPVEnterprises = () => {
     {
       icon: <Zap className="w-5 h-5" />,
       title: "Electrical Products",
-      description: "Wiring, lighting solutions & branded electricals"
+      description: "Wiring, Switches, lighting solutions & branded electricals"
     },
     {
       icon: <Package className="w-5 h-5" />,
@@ -49,7 +49,7 @@ const AboutPVEnterprises = () => {
             About <span className="border-b-4 border-red-600">PV Enterprises</span>
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Your trusted trading partner for sanitary, electrical, and plumbing products
+            Your trusted trading partner for Electrical, sanitary and plumbing products
           </p>
         </motion.div>
 
@@ -92,7 +92,7 @@ const AboutPVEnterprises = () => {
           >
             <div>
               <h2 className="text-3xl font-bold text-red-600 mb-4">
-                Excellence Since 2003
+                Excellence Since 2008
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 PV Enterprises has been Kerala's leading supplier of sanitary, electrical, 
@@ -165,7 +165,7 @@ const AboutPVEnterprises = () => {
             <div className="text-sm text-gray-600">Trusted Clients</div>
           </div>
           <div className="border-4 border-red-600 p-6">
-            <div className="text-3xl font-bold text-red-600">23+</div>
+            <div className="text-3xl font-bold text-red-600">22+</div>
             <div className="text-sm text-gray-600">Years Experience</div>
           </div>
           <div className="border-4 border-red-600 p-6">

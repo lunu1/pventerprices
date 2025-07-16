@@ -1,5 +1,5 @@
 import React from 'react';
-import aboutus from "../assets/images/AboutUs.jpg"
+import aboutus from "../assets/images/AboutUs.jpg";
 
 const AboutUs = () => {
   return (
@@ -11,7 +11,7 @@ const AboutUs = () => {
             About Us
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            PV Enterprises - One Stop Solutions for Electrical, Plumbing and Sanitary needs.
+            PV Enterprises – Your Trusted Partner for Quality Trading Solutions.
           </p>
         </div>
 
@@ -21,57 +21,57 @@ const AboutUs = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <p className="text-gray-600">
-                PV Enterprises is your trusted partner for comprehensive electrical, plumbing, and sanitary services. With years of expertise and dedication to excellence, we bring reliable solutions to both residential and commercial clients.
+                PV Enterprises is a leading name in trading, offering a wide range of high-quality products sourced from reliable manufacturers and suppliers. We specialize in delivering excellence across multiple categories to meet the diverse needs of our customers.
               </p>
               <p className="mt-4 text-gray-600">
-                Our mission is to deliver premium quality services that meet the highest standards of safety, efficiency, and customer satisfaction — all under one roof.
+                Our mission is to provide competitive pricing, uncompromised quality, and exceptional customer satisfaction, making us the preferred choice for businesses and individuals alike.
               </p>
               <p className="mt-4 text-gray-600">
-                Located conveniently near Francis Alukkas Jewellery, Ram Mohan Road, Chinthavalapp, Kozhikode - 04, we are just a call away from resolving your home or business utility needs.
+                Conveniently located near Francis Alukkas Jewellery, Ram Mohan Road, Chinthavalapp, Kozhikode - 04, we ensure seamless trading solutions that you can trust.
               </p>
             </div>
             <div className="flex justify-center">
               <img
                 src={aboutus} 
-                alt="PV Enterprises Services"
+                alt="PV Enterprises Trading"
                 className="w-full h-64 object-contain"
               />
             </div>
           </div>
 
-          {/* Services Overview */}
+          {/* Product Categories */}
           <div className="mt-12">
             <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
-              Our Service Highlights
+              Our Product Categories
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Electrical Services */}
+              {/* Electrical Products */}
               <div className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
                 <h4 className="text-lg font-semibold text-gray-900 text-center mb-2">
-                  Electrical Services
+                  Electrical Products
                 </h4>
                 <p className="text-gray-600 text-center">
-                  Expert wiring, lighting installation, maintenance, and upgrades for residential and commercial projects.
+                  High-quality cables, switches, lighting, and accessories sourced from trusted brands for residential and commercial needs.
                 </p>
               </div>
 
-              {/* Plumbing Services */}
+              {/* Plumbing Products */}
               <div className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
                 <h4 className="text-lg font-semibold text-gray-900 text-center mb-2">
-                  Plumbing Services
+                  Plumbing Products
                 </h4>
                 <p className="text-gray-600 text-center">
-                  From leak repairs to complete system installations, we ensure reliable and clean water flow for your property.
+                  Durable pipes, fittings, and plumbing essentials designed to ensure smooth water systems for every project.
                 </p>
               </div>
 
-              {/* Sanitary Solutions */}
+              {/* Sanitary & Bathroom Solutions */}
               <div className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
                 <h4 className="text-lg font-semibold text-gray-900 text-center mb-2">
-                  Sanitary Solutions
+                  Sanitary & Bathroom Solutions
                 </h4>
                 <p className="text-gray-600 text-center">
-                  Hygienic and high-standard sanitary fittings and repairs, keeping your spaces safe and modern.
+                  Modern sanitary ware and accessories combining style, hygiene, and durability for premium spaces.
                 </p>
               </div>
             </div>
@@ -81,13 +81,13 @@ const AboutUs = () => {
         {/* Contact Section */}
         <div className="mt-12 text-center">
           <p className="text-lg text-gray-600">
-            Reach us at: <strong>+91 9387338100, 940022486</strong>
+            Contact us at: <strong>+91 9387338100, 940022486</strong>
           </p>
           <p className="text-lg text-gray-600 mt-2">
             Location: Near Francis Alukkas Jewellery, Ram Mohan Road, Chinthavalapp, Kozhikode - 04
           </p>
           <p className="mt-6 text-2xl font-bold text-gray-900">
-            PV Enterprises – Reliable Solutions, Exceptional Service.
+            PV Enterprises – Reliable Products, Trusted Trading.
           </p>
         </div>
       </div>

@@ -4,17 +4,19 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 const backgrounds = [
   { 
-    video: "hero.mp4", 
-    heading: "PLUMBING" 
-  },
-  { 
-    video: "hero2.mp4", 
-    heading: "SANITARY" 
-  },
-  { 
     video: "hero3.mp4", 
     heading: "ELECTRICAL" 
   },
+   { 
+    video: "hero.mp4", 
+    heading: "SANITARY" 
+  },
+  { 
+    video: "hero_3.mp4", 
+    heading: "PLUMBING" 
+  },
+ 
+  
 ];
 
 export const ProductBanner = () => {

@@ -295,6 +295,12 @@ export const Navbar = () => {
 </div>
 
 
+
+{/* ───────── pumpling dropdown ───────── */}
+
+
+
+
                 {/* ───────── static links ───────── */}
                
                 <Link
@@ -582,6 +588,10 @@ export const Navbar = () => {
 
   </>
 )}
+
+
+
+
 
 
               <Link

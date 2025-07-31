@@ -11,16 +11,17 @@ import {
 
 const AboutPVEnterprises = () => {
   const categories = [
+     {
+      icon: <Zap className="w-5 h-5" />,
+      title: "Electrical Products",
+      description: "Wiring, Switches, lighting solutions & branded electricals"
+    },
     {
       icon: <Droplet className="w-5 h-5" />,
       title: "Sanitary Products",
       description: "Premium bathroom fittings, pipes & accessories"
     },
-    {
-      icon: <Zap className="w-5 h-5" />,
-      title: "Electrical Products",
-      description: "Wiring, Switches, lighting solutions & branded electricals"
-    },
+   
     {
       icon: <Package className="w-5 h-5" />,
       title: "Plumbing Essentials",

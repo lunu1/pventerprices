@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 2,
-    image: '/hero_2.png',
+    image: '/hero2.jpeg',
     title: (
       <>
         Power Your World with <br /> <span className="text-red-500">Top Electrical Brands</span>
@@ -31,7 +31,7 @@ const slides = [
   },
   {
     id: 3,
-    image: '/hero_3.jpg',
+    image: '/hero_3.png',
     title: (
       <>
         Brighten Your Life with <br /> Premium <span className="text-red-500">Lighting Solutions</span>

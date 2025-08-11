@@ -30,7 +30,7 @@ const AboutPVEnterprises = () => {
   ];
 
   const features = [
-    "25+ Years in Trading",
+    "17+ Years in Trading",
     "Top Branded Products",
     "Wide Range of Stock",
     "Quality Guaranteed"
@@ -97,7 +97,7 @@ const AboutPVEnterprises = () => {
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 PV Enterprises has been Kerala's leading supplier of sanitary, electrical, 
-                and plumbing products for over 22 years.
+                and plumbing products for over 17 years.
               </p>
               <p className="text-gray-700 leading-relaxed">
                 We partner with top brands to provide premium quality products that meet 
@@ -166,7 +166,7 @@ const AboutPVEnterprises = () => {
             <div className="text-sm text-gray-600">Trusted Clients</div>
           </div>
           <div className="border-4 border-red-600 p-6">
-            <div className="text-3xl font-bold text-red-600">22+</div>
+            <div className="text-3xl font-bold text-red-600">17+</div>
             <div className="text-sm text-gray-600">Years Experience</div>
           </div>
           <div className="border-4 border-red-600 p-6">

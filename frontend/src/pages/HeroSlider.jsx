@@ -12,7 +12,7 @@ const slides = [
     image: '/hero1.jpg',
     title: (
       <>
-        Transform Your Bathroom <br /> with <span className="text-red-500">Luxury Sanitaryware</span>
+        Elavate Your Bathroom  with <br /> <span className="text-red-500">Premium Sanitaryware and Plumbing </span>
       </>
     ),
     subtitle:
@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 2,
-    image: '/hero_2.png',
+    image: '/hero_2.jpeg',
     title: (
       <>
         Power Your World with <br /> <span className="text-red-500">Top Electrical Brands</span>
@@ -31,10 +31,10 @@ const slides = [
   },
   {
     id: 3,
-    image: '/hero_3.jpg',
+    image: '/hero_3.png',
     title: (
       <>
-        Brighten Your Life with <br /> Premium <span className="text-red-500">Lighting Solutions</span>
+        Illuminate Your Space with <br /> <span className="text-red-500">Top - Quality Lighting & Fan Solutions</span>
       </>
     ),
     subtitle:
@@ -70,7 +70,7 @@ const HeroSlider = () => {
                 transition={{ duration: 0.8 }}
                 className="relative z-10 text-center px-4 max-w-4xl"
               >
-                <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-snug drop-shadow-lg mb-6">
+                <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-snug drop-shadow-lg mb-6 text-wrap">
                   {slide.title}
                 </h1>
                 <p className="text-lg md:text-2xl text-gray-200 mb-8">

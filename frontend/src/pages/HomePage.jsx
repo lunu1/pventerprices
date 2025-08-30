@@ -42,12 +42,12 @@ export const HomePage = () => {
 
         <ProductBanner/>
         </div>
-        <div className="pt-[50px]">
+        {/* <div className="pt-[50px]">
           <ProductFeatured />
-        </div>
-        {/* <div>
-          <BrandsSection/>
         </div> */}
+        <div>
+          <BrandsSection/>
+        </div>
         {/* <ShopByCategory /> */}
         <Footer />
       </div>

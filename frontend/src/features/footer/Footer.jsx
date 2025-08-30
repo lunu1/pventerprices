@@ -152,7 +152,7 @@ export const Footer = () => {
             flexWrap="wrap"
           >
             <a
-              href="https://www.facebook.com/pventerprises"
+              href="https://www.facebook.com/share/1BgbWhoSqu/?mibextid=wwXIfr"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -166,7 +166,7 @@ export const Footer = () => {
             </a>
 
             <a
-              href="https://www.instagram.com/pventerprises"
+              href="https://www.instagram.com/pv__enterprises?igsh=dnN4bHZnaXVzZjc3"
               target="_blank"
               rel="noopener noreferrer"
             >

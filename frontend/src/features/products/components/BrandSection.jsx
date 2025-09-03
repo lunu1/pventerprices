@@ -1,201 +1,68 @@
-// import React, { useState } from 'react';
-
-// const BrandsSection = () => {
-//   const [visibleCount, setVisibleCount] = useState(6); // Show first 8 brands initially
-
-//   // Static brand data - replace with your dynamic data later
-//   const brands = [
-//     {
-//       id: 1,
-//       name: "Jaquar",
-//       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5yQUgyIvFFpKiZkPZa7o_wIEcD3_zwDt_q0s6&s=0"
-//     },
-//     {
-//       id: 2,
-//       name: "Kohler",
-//       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcIA1ZgNyagetEasvXp0VqXAgiCtP4FAIm_B6H&s=0"
-//     },
-//     {
-//       id: 3,
-//       name: "Cera",
-//       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpiuLNjNWGdrYp7s1U5Wf9kS_9__6rAYucIGOc&s=0"
-//     },
-//     {
-//       id: 4,
-//       name: "TOTO",
-//       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTZiZtCeI9Y9Z3E7VsIA2FYS7700YVzxUezbUh&s=0"
-//     },
-//     {
-//       id: 5,
-//       name: "Tesla",
-//       logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552265/21783_zrpsrc.jpg"
-//     },
-//     {
-//       id: 6,
-//       name: "Parryware",
-//       logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552504/parryware-senetry-Logo-Vector.svg-_uulahr.webp"
-//     },
-//     {
-//       id: 7,
-//       name: "Nike",
-//       logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552621/web-183282388_qmdcy9.webp"
-//     },
-//     {
-//       id: 8,
-//       name: "Samsung",
-//       logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552808/Samsung-Logo-PNG-Images_v5umwo.webp"
-//     },
-//     {
-//       id: 9,
-//       name: "Sony",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=SONY"
-//     },
-//     {
-//       id: 10,
-//       name: "Meta",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=META"
-//     },
-//     {
-//       id: 11,
-//       name: "Adobe",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=ADOBE"
-//     },
-//     {
-//       id: 12,
-//       name: "Intel",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=INTEL"
-//     },
-//     {
-//       id: 13,
-//       name: "IBM",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=IBM"
-//     },
-//     {
-//       id: 14,
-//       name: "Oracle",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=ORACLE"
-//     },
-//     {
-//       id: 15,
-//       name: "Cisco",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=CISCO"
-//     },
-//     {
-//       id: 16,
-//       name: "HP",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=HP"
-//     },
-//     {
-//       id: 17,
-//       name: "Dell",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=DELL"
-//     },
-//     {
-//       id: 18,
-//       name: "Spotify",
-//       logo: "https://via.placeholder.com/120x80/000000/FFFFFF?text=SPOTIFY"
-//     }
-//   ];
-
-//   const showMore = () => {
-//     // Add 4 more brands on mobile (2 cols), 6 more on desktop (6 cols)
-//     const isMobile = window.innerWidth < 768;
-//     const increment = isMobile ? 4 : 6;
-//     setVisibleCount(prevCount => prevCount + increment);
-//   };
-
-//   const visibleBrands = brands.slice(0, visibleCount);
-//   const hasMoreBrands = visibleCount < brands.length;
-
-//   return (
-//     <div className="bg-white py-16 px-4">
-//       <h1 className='text-center text-3xl font-semibold mb-8 uppercase'>Our Brands</h1>
-//       <div className="">
-//         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-//           {visibleBrands.map((brand) => (
-//             <div 
-//               key={brand.id} 
-//               className="group cursor-pointer"
-//             >
-//               <div className="bg-gray-100 border-2 border-gray-200 aspect-square flex flex-col items-center justify-center p-2 md:p-4 transition-all duration-300 group-hover:border-black group-hover:bg-gray-50">
-//                 <div className="mb-1 md:mb-2">
-//                  <img 
-//   src={brand.logo} 
-//   alt={brand.name}
-//   className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-// />
-
-//                 </div>
-//                 <h3 className="text-xs font-medium text-black text-center leading-tight">
-//                   {brand.name}
-//                 </h3>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-        
-        
-//         {hasMoreBrands && (
-//           <div className="text-center mt-8">
-//             <button 
-//               onClick={showMore}
-//               className="px-6 py-3 border-2 border-black bg-white text-black font-medium hover:bg-black hover:text-white transition-all duration-300"
-//             >
-//               Show More
-//             </button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BrandsSection;
-
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBrandsAsync, selectBrands } from "../../brands/BrandSlice";
 
 const BrandsSection = () => {
+  const dispatch = useDispatch();
+
+  // Fetch brands on mount
+  useEffect(() => {
+    dispatch(fetchAllBrandsAsync());
+  }, [dispatch]);
+
+  // If your slice returns only the array, this is fine.
+  // If it returns an object (e.g., { items, status, error }), adapt lines below accordingly.
+  const brandsFromStore = useSelector(selectBrands) || [];
+
+  // Local UI state
   const [visibleCount, setVisibleCount] = useState(6);
   const [offset, setOffset] = useState(0);
 
-  const brands = [
-    { id: 1, name: "Jaquar", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5yQUgyIvFFpKiZkPZa7o_wIEcD3_zwDt_q0s6&s=0" },
-    { id: 2, name: "Kohler", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcIA1ZgNyagetEasvXp0VqXAgiCtP4FAIm_B6H&s=0" },
-    { id: 3, name: "Cera", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpiuLNjNWGdrYp7s1U5Wf9kS_9__6rAYucIGOc&s=0" },
-    { id: 4, name: "TOTO", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTZiZtCeI9Y9Z3E7VsIA2FYS7700YVzxUezbUh&s=0" },
-    { id: 5, name: "Tesla", logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552265/21783_zrpsrc.jpg" },
-    { id: 6, name: "Parryware", logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552504/parryware-senetry-Logo-Vector.svg-_uulahr.webp" },
-    { id: 7, name: "Nike", logo: "https://res.cloudinary.com/dxq0nrirt/image/upload/v1756552621/web-183282388_qmdcy9.webp" },
-    // add more when you like…
-  ];
+  // Normalize optional id fields once to keep keys stable
+  const normalizedBrands = useMemo(
+    () =>
+      (brandsFromStore || []).map((b, idx) => ({
+        id: b.id ?? b._id ?? idx,
+        name: b.name ?? b.title ?? "Untitled",
+        image:
+          b.image ??
+          b.imageURL ??
+          b.image ??
+          "https://via.placeholder.com/128x128?text=Logo",
+      })),
+    [brandsFromStore]
+  );
 
-  const visibleBrands = useMemo(() => brands.slice(0, visibleCount), [brands, visibleCount]);
+  const visibleBrands = useMemo(
+    () => normalizedBrands.slice(0, visibleCount),
+    [normalizedBrands, visibleCount]
+  );
+
+  const hasMore = visibleCount < normalizedBrands.length;
 
   // Refs for measuring the single track width
   const trackRef = useRef(null);
   const rafRef = useRef(null);
 
-  // Seamless scroll speed (pixels per second)
-  const SPEED = 60; // tweak as needed
-  // Gap between items (in pixels)
-  const GAP_PX = 24; // tweak as needed
+  // Seamless scroll config
+  const SPEED = 60; // pixels/sec
+  const GAP_PX = 24;
 
   // Start the RAF loop
   useEffect(() => {
+    if (!visibleBrands.length) return;
+
     let last = performance.now();
 
     const loop = (now) => {
       const dt = (now - last) / 1000;
       last = now;
 
-      // Width of the first track (one copy)
       const singleWidth = trackRef.current?.offsetWidth || 0;
 
       setOffset((prev) => {
         if (singleWidth <= 0) return prev;
         const next = prev + SPEED * dt;
-        // When we've scrolled one full track, wrap around seamlessly
         return next >= singleWidth ? next - singleWidth : next;
       });
 
@@ -203,10 +70,12 @@ const BrandsSection = () => {
     };
 
     rafRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, [visibleBrands.length]);
 
-  // Recalculate / reset offset when items change or window resizes
+  // Reset offset on list changes or resize
   useEffect(() => {
     setOffset(0);
     const onResize = () => setOffset(0);
@@ -215,38 +84,61 @@ const BrandsSection = () => {
   }, [visibleBrands.length]);
 
   const showMore = () => {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     setVisibleCount((c) => c + (isMobile ? 4 : 6));
   };
-
-  const hasMore = visibleCount < brands.length;
 
   // Render one logo card
   const LogoCard = ({ brand }) => (
     <div
       className="bg-gray-100 border-2 border-gray-200 aspect-square flex flex-col items-center justify-center p-2 md:p-4 transition-all duration-300 group-hover:border-black group-hover:bg-gray-50"
-      style={{ width: 160, minWidth: 160 }} // keep cards consistent so scrolling is smooth
+      style={{ width: 160, minWidth: 160 }}
     >
       <div className="mb-1 md:mb-2">
         <img
-          src={brand.logo}
+          src={brand.image}
           alt={brand.name}
           className="w-32 h-32 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+          onError={(e) => {
+            e.currentTarget.src =
+              "https://via.placeholder.com/128x128?text=Logo";
+          }}
+          loading="lazy"
         />
       </div>
-      <h3 className="text-xs font-medium text-black text-center leading-tight">{brand.name}</h3>
+      <h3 className="text-xs font-medium text-black text-center leading-tight">
+        {brand.name}
+      </h3>
     </div>
   );
 
+  // Simple loading/empty states (adjust if your slice exposes status/error)
+  if (!normalizedBrands.length) {
+    return (
+      <div className="bg-white py-16 px-4">
+        <h1 className="text-center text-3xl font-semibold mb-8 uppercase">
+          Our Brands
+        </h1>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-40 bg-gray-100 border-2 border-gray-200 animate-pulse"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white py-16 px-4">
-      <h1 className="text-center text-3xl font-semibold mb-8 uppercase">Our Brands</h1>
+      <h1 className="text-center text-3xl font-semibold mb-8 uppercase">
+        Our Brands
+      </h1>
 
-      {/* Seamless continuous scroller (no external CSS, no <marquee>) */}
-      <div
-        className="overflow-hidden"
-        style={{ width: "100%" }}
-      >
+      {/* Seamless continuous scroller */}
+      <div className="overflow-hidden" style={{ width: "100%" }}>
         <div
           style={{
             display: "flex",
@@ -289,6 +181,3 @@ const BrandsSection = () => {
 };
 
 export default BrandsSection;
-
-
-

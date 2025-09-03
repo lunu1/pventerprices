@@ -91,14 +91,14 @@ const BrandsSection = () => {
   // Render one logo card
   const LogoCard = ({ brand }) => (
     <div
-      className="bg-gray-100 border-2 border-gray-200 aspect-square flex flex-col items-center justify-center p-2 md:p-4 transition-all duration-300 group-hover:border-black group-hover:bg-gray-50"
+      className="border-2 border-gray-200 aspect-square flex flex-col items-center justify-center p-2 md:p-4 transition-all duration-300 group-hover:border-black group-hover:bg-gray-50"
       style={{ width: 160, minWidth: 160 }}
     >
       <div className="mb-1 md:mb-2">
         <img
           src={brand.image}
           alt={brand.name}
-          className="w-32 h-32 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+          className="w-32 h-32 object-contain  group-hover:grayscale-0 transition-all duration-300"
           onError={(e) => {
             e.currentTarget.src =
               "https://via.placeholder.com/128x128?text=Logo";

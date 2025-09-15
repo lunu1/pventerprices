@@ -12,6 +12,7 @@ import { ProductBanner } from "../features/products/components/ProductBanner.jsx
 import AboutPVAnterices from "./AboutPv.jsx";
 import BrandsSection from "../features/products/components/BrandSection.jsx";
 import HeroSlider from "./HeroSlider.jsx";
+import PVITSolutionsStrip from "../components/PVITSolutionsStrip.jsx";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export const HomePage = () => {
           <NewArrivalCategory />
         </div>
 
+        <PVITSolutionsStrip/>
         <div>
           <AboutPVAnterices/>
         </div>

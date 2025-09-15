@@ -48,6 +48,7 @@ import NewArrivalsLayout from "./features/products/pages/NewArrivalsLayout";
 import PaymentProcessing from "./features/checkout/components/PaymentProcessing";
 import AddCategory from "./features/admin/components/AddCategory";
 import BrandProducts from "./features/products/pages/BrandProducts";
+import PVITSolutionsPage from "./pages/pv-it-solutions";
 
 function App() {
   const isAuthChecked = useSelector(selectIsAuthChecked);
@@ -76,6 +77,7 @@ function App() {
 
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/new-arrivals/:categoryTitle" element={<NewArrivalsLayout />} />
+        <Route path="/pv-it-solutions" element={<PVITSolutionsPage />} />
 
         {loggedInUser?.isAdmin ? (
           // admin routes
@@ -99,6 +101,7 @@ function App() {
             <Route path="/order-success/:id" element={ <Protected>  <OrderSuccessPage />  </Protected> } />
             <Route  path="/orders"  element={ <Protected> <UserOrdersPage />  </Protected> } />
             <Route path="/wishlist" element={ <Protected> <WishlistPage />  </Protected>    } />
+
           </>
         )}
 

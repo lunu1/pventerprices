@@ -65,7 +65,7 @@ const AboutPVEnterprises = () => {
           >
             <div className="relative overflow-hidden border-4 border-red-600">
               <img
-                src="https://www.capitaltrading.co/wp-content/uploads/2022/07/ZZH_T23447A01_000_01-1024x768.jpg"
+                src="/AboutUs.jpg"
                 alt="PV Enterprises Trading Store"
                 className="w-full h-96 object-cover filter hover:grayscale transition-all duration-500"
               />

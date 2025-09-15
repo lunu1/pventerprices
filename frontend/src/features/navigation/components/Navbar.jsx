@@ -164,7 +164,7 @@ export const Navbar = () => {
 
 
           {/* Center Column - Logo */}
-   <div className="flex items-center">
+   <div className="flex items-center text-nowrap">
             {!loggedInUser?.isAdmin && (
               <div className="hidden md:flex gap-8 items-center uppercase">
                  <Link
@@ -178,6 +178,12 @@ export const Navbar = () => {
                   className="text-sm font-medium hover:text-gray-600"
                 >
                   ABOUT
+                </Link>
+                 <Link
+                  to="/pv-it-solutions"
+                  className="text-sm font-medium hover:text-gray-600"
+                >
+                  IT Solutions
                 </Link>
                 {/* ───────── categories with their own dropdowns ───────── */}
                 {categories.map((category) => (

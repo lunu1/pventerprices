@@ -88,7 +88,7 @@ export default function PVITSolutionsPage() {
     <div className="relative flex h-full items-end p-8 sm:p-12"> {/* h-full instead of min-h */}
       <div>
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
-          IT AND AUTOMATION SOLUTION
+          AUTOMATION & IT SOLUTION
         </h1>
         <p className="mt-3 max-w-2xl text-base sm:text-lg text-white/90">
           Smart IT and automation systems that simplify control, boost performance, and connect your spaces — from offices to homes.

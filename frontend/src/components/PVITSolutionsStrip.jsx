@@ -45,7 +45,7 @@ export default function PVITSolutionsStrip() {
               <div>
                 <p className="text-sm font-medium text-red-700">New Division</p>
                 <h3 className="text-lg font-semibold tracking-tight">
-                  PV IT SOLUTIONS
+                  AUTOMATION & IT SOLUTION
                 </h3>
               </div>
             </div>

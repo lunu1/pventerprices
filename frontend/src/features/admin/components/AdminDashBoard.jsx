@@ -491,6 +491,21 @@ const cancelDelete = () => {
           </Stack>
         )}
       </Stack>
+      <Dialog open={openDialog} onClose={cancelDelete}>
+  <DialogTitle>Delete product?</DialogTitle>
+  <DialogContent>
+    <Typography variant="body2">
+      This action permanently deletes the product. Continue?
+    </Typography>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={cancelDelete}>Cancel</Button>
+    <Button color="error" variant="contained" onClick={confirmDelete}>
+      Delete
+    </Button>
+  </DialogActions>
+</Dialog>
+
     </>
   );
 };

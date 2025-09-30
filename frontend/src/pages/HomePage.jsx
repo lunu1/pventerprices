@@ -28,14 +28,15 @@ export const HomePage = () => {
   return (
     <>
       <Navbar />
-      <div className="pt-[65px]">
+      <div className="pt-[40px]">
         {/* <HeroBanner /> */}
+        <PVITSolutionsStrip />
         <HeroSlider />
         <div className="pt-[25px]">
           <NewArrivalCategory />
         </div>
 
-        <PVITSolutionsStrip/>
+       
         <div>
           <AboutPVAnterices/>
         </div>
